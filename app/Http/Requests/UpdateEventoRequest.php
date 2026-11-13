@@ -15,10 +15,10 @@ class UpdateEventoRequest extends FormRequest
     {
         return [
             'nome' => 'sometimes|required|string|max:255',
-            'descricao' => 'sometimes|nullable|string',
+            'descricao' => 'sometimes|required|string',
             'local' => 'sometimes|required|string|max:255',
             'dt_evento' => 'sometimes|required|date|after_or_equal:today',
-            'horario' => 'sometimes|required',
+            'horario' => 'sometimes|required|date_format:H:i',
             'qtd_max_participantes' => 'sometimes|required|integer|min:1',
         ];
     }
