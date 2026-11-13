@@ -15,7 +15,7 @@ class StoreEventoRequest extends FormRequest
     {
         return [
             'nome' => 'required|string|max:255',
-            'descricao' => 'nullable|string',
+            'descricao' => 'required|string',
             'local' => 'required|string|max:255',
             'dt_evento' => 'required|date|after_or_equal:today',
             'horario' => 'required',
