@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventoController;
+use App\Http\Controllers\Api\InscricaoController;
 use Illuminate\Support\Facades\Route;
 
 // Autenticação
@@ -23,5 +24,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::match(['put', 'patch'], '/eventos/{evento}', [EventoController::class, 'update']); 
 
     Route::delete('/eventos/{evento}', [EventoController::class, 'destroy']);
+
+    // Inscrições
+    Route::post('/eventos/{evento}/inscricoes', [InscricaoController::class, 'store']);
+    Route::get('/minhas-inscricoes', [InscricaoController::class, 'index']);
+    Route::get('/inscricoes/{inscricao}', [InscricaoController::class, 'show']);
+    Route::delete('/inscricoes/{inscricao}', [InscricaoController::class, 'destroy']);
 
 });

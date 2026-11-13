@@ -15,7 +15,7 @@ class EventoService
             throw new BadRequestHttpException('Quantidade por página deve ser maior que 0');
         }
 
-        return EventoResource::collection(Evento::paginate($porPagina));
+        return EventoResource::collection(Evento::withCount('inscricoes')->paginate($porPagina));
     }
 
     public function show(Evento $evento): EventoResource
