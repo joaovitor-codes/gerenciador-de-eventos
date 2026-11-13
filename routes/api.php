@@ -10,7 +10,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Rotas públicas de eventos
 Route::get('/eventos', [EventoController::class, 'index']);
-Route::get('/eventos/{id}', [EventoController::class, 'show']);
+Route::get('/eventos/{evento}', [EventoController::class, 'show']);
 
 // Rotas protegidas
 Route::middleware('auth:sanctum')->group(function () {
@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/eventos', [EventoController::class, 'store']);
 
-    Route::match(['put', 'patch'], '/eventos/{id}', [EventoController::class, 'update']); 
+    Route::match(['put', 'patch'], '/eventos/{evento}', [EventoController::class, 'update']); 
 
-    Route::delete('/eventos/{id}', [EventoController::class, 'destroy']);
+    Route::delete('/eventos/{evento}', [EventoController::class, 'destroy']);
 
 });
