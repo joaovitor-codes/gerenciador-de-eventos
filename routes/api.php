@@ -27,8 +27,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Inscrições
     Route::post('/eventos/{evento}/inscricoes', [InscricaoController::class, 'store']);
-    Route::get('/minhas-inscricoes', [InscricaoController::class, 'index']);
-    Route::get('/inscricoes/{inscricao}', [InscricaoController::class, 'show']);
-    Route::delete('/inscricoes/{inscricao}', [InscricaoController::class, 'destroy']);
 
 });
