@@ -9,8 +9,8 @@ class EventoResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        // Enquanto não houver inscrições, todas as vagas estão disponíveis.
-        $participantesInscritos = 0;
+        // Usa o withCount('inscricoes') quando carregado; senão, conta no banco.
+        $participantesInscritos = $this->inscricoes_count ?? $this->inscricoes()->count();
 
         $vagasRestantes = max(
             0,
