@@ -7,11 +7,25 @@ use App\Models\Evento;
 use App\Models\Inscricao;
 use App\Models\User;
 use Illuminate\Database\UniqueConstraintViolationException;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class InscricaoService
 {
+    /**
+     * Lista apenas as inscrições do usuário informado, com os dados do evento.
+     */
+    public function listByUser(User $user): AnonymousResourceCollection
+    {
+        $inscricoes = $user->inscricoes()
+            ->with(['evento' => fn ($query) => $query->withCount('inscricoes')])
+            ->latest()
+            ->get();
+
+        return InscricaoResource::collection($inscricoes);
+    }
+
     public function create(User $user, Evento $evento): InscricaoResource
     {
         try {

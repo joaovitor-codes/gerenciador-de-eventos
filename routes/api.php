@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/eventos/{evento}', [EventoController::class, 'destroy']);
 
     // Inscrições
+    Route::get('/minhas-inscricoes', [InscricaoController::class, 'index']);
     Route::post('/eventos/{evento}/inscricoes', [InscricaoController::class, 'store']);
     Route::delete('/inscricoes/{inscricao}', [InscricaoController::class, 'destroy']);
 
