@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Resources\InscricaoResource;
 use App\Models\Evento;
+use App\Models\Inscricao;
 use App\Models\User;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -52,5 +53,18 @@ class InscricaoService
         }
 
         return new InscricaoResource($inscricao->load(['evento' => fn ($query) => $query->withCount('inscricoes')]));
+    }
+
+    /**
+     * Cancela a inscrição. Como a lotação é calculada pela contagem de
+     * inscrições, removê-la libera automaticamente a vaga no evento.
+     */
+    public function delete(Inscricao $inscricao): void
+    {
+        DB::transaction(function () use ($inscricao) {
+            Evento::whereKey($inscricao->evento_id)->lockForUpdate()->first();
+
+            $inscricao->delete();
+        });
     }
 }
