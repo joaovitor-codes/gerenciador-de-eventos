@@ -51,6 +51,16 @@ As rotas protegidas usam o middleware `auth:sanctum`. Envie o token obtido no lo
 Authorization: Bearer <seu-token>
 ```
 
+## Collection do Postman
+
+A collection com todas as rotas da API está em `docs/postman/gerenciador-de-eventos.postman_collection.json`. Para usar, importe o arquivo no Postman (**Import** → selecione o arquivo).
+
+- A URL base fica na variável `base_url` da collection (padrão: `http://localhost:8000/api`).
+- Ao executar **Registrar** ou **Login**, o token é salvo automaticamente e enviado nas rotas protegidas.
+- **Cadastrar evento** e **Inscrever-se em evento** salvam o `evento_id` e o `inscricao_id`, que são usados pelas requisições seguintes.
+
+Fluxo sugerido: Registrar → Cadastrar evento → Inscrever-se → Minhas inscrições → Cancelar inscrição.
+
 ## Testes
 
 ```bash
