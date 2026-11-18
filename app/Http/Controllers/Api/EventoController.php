@@ -9,6 +9,7 @@ use App\Models\Evento;
 use App\Services\EventoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EventoController extends Controller
 {
@@ -30,7 +31,7 @@ class EventoController extends Controller
     public function store(StoreEventoRequest $request): JsonResponse
     {
         return $this->eventoService
-            ->create($request->validated())
+            ->create($request->user(), $request->validated())
             ->response()
             ->setStatusCode(201);
     }
@@ -48,6 +49,8 @@ class EventoController extends Controller
      */
     public function update(UpdateEventoRequest $request, Evento $evento)
     {
+        Gate::authorize('update', $evento);
+
         return $this->eventoService->update($evento, $request->validated());
     }
 
@@ -56,6 +59,8 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento): JsonResponse
     {
+        Gate::authorize('delete', $evento);
+
         $this->eventoService->delete($evento);
 
         return response()->json(null, 204);
