@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Resources\EventoResource;
 use App\Models\Evento;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -23,9 +24,9 @@ class EventoService
         return new EventoResource($evento);
     }
 
-    public function create(array $dados): EventoResource
+    public function create(User $user, array $dados): EventoResource
     {
-        $evento = Evento::create($dados);
+        $evento = $user->eventosCriados()->create($dados);
 
         return new EventoResource($evento);
     }
