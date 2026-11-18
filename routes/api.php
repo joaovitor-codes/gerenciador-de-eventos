@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventoController;
+use App\Http\Controllers\Api\InscricaoController;
 use Illuminate\Support\Facades\Route;
 
 // Autenticação
@@ -10,7 +11,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Rotas públicas de eventos
 Route::get('/eventos', [EventoController::class, 'index']);
-Route::get('/eventos/{id}', [EventoController::class, 'show']);
+Route::get('/eventos/{evento}', [EventoController::class, 'show']);
 
 // Rotas protegidas
 Route::middleware('auth:sanctum')->group(function () {
@@ -20,8 +21,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/eventos', [EventoController::class, 'store']);
 
-    Route::match(['put', 'patch'], '/eventos/{id}', [EventoController::class, 'update']); 
+    Route::match(['put', 'patch'], '/eventos/{evento}', [EventoController::class, 'update']); 
 
-    Route::delete('/eventos/{id}', [EventoController::class, 'destroy']);
+    Route::delete('/eventos/{evento}', [EventoController::class, 'destroy']);
+
+    // Inscrições
+    Route::get('/minhas-inscricoes', [InscricaoController::class, 'index']);
+    Route::post('/eventos/{evento}/inscricoes', [InscricaoController::class, 'store']);
+    Route::delete('/inscricoes/{inscricao}', [InscricaoController::class, 'destroy']);
 
 });
