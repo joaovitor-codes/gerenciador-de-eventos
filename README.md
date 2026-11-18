@@ -2,6 +2,8 @@
 
 API REST para gerenciamento de eventos, desenvolvida em Laravel 13 com autenticação via Laravel Sanctum.
 
+As collections para testar as rotas da API estão na pasta [`docs/`](docs/) — veja [Documentação e collections](#documentação-e-collections).
+
 ## Requisitos
 
 - PHP 8.3 ou superior, com as extensões `pdo_sqlite`, `mbstring`, `openssl`, `tokenizer`, `xml` e `ctype`
@@ -51,9 +53,19 @@ As rotas protegidas usam o middleware `auth:sanctum`. Envie o token obtido no lo
 Authorization: Bearer <seu-token>
 ```
 
-## Collection do Postman
+## Documentação e collections
 
-A collection com todas as rotas da API está em `docs/postman/gerenciador-de-eventos.postman_collection.json`. Para usar, importe o arquivo no Postman (**Import** → selecione o arquivo).
+As collections da API ficam na pasta [`docs/`](docs/):
+
+```
+docs/
+└── postman/
+    └── gerenciador-de-eventos.postman_collection.json
+```
+
+### Postman
+
+A collection com todas as rotas da API está em [`docs/postman/gerenciador-de-eventos.postman_collection.json`](docs/postman/gerenciador-de-eventos.postman_collection.json). Para usar, importe o arquivo no Postman (**Import** → selecione o arquivo).
 
 - A URL base fica na variável `base_url` da collection (padrão: `http://localhost:8000/api`).
 - Ao executar **Registrar** ou **Login**, o token é salvo automaticamente e enviado nas rotas protegidas.
