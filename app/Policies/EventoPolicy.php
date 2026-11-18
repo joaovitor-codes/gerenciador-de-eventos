@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Evento;
+use App\Models\User;
+
+class EventoPolicy
+{
+    public function update(User $user, Evento $evento): bool
+    {
+        return $user->id === $evento->user_id;
+    }
+
+    public function delete(User $user, Evento $evento): bool
+    {
+        return $user->id === $evento->user_id;
+    }
+}

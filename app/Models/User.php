@@ -38,6 +38,14 @@ class User extends Authenticatable
     return $this->hasMany(Inscricao::class);
 }
 
+/**
+ * Eventos cadastrados pelo usuário (não confundir com eventos() = inscrições).
+ */
+public function eventosCriados(): HasMany
+{
+    return $this->hasMany(Evento::class);
+}
+
 public function eventos(): BelongsToMany
 {
     return $this->belongsToMany(Evento::class, 'inscricoes')->withTimestamps();
